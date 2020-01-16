@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8"/>
+    <title>ユーザー管理機能画面</title>
+  </head>
+  <body>
+  	<div>
+  		<div>
+  		    ユーザー
+   		    <span th:text="${@sessionData.loginUser.userName}"></span>
+		</div>
+		<div>
+		<!--
+			<form id="userDetailForm" name="userDetailForm" action="/webapp/admin/management/users/userDetail"
+				th:action="@{/admin/management/users/userDetail" th:object="${userDetailForm}" method="post">
+		-->
+  				<table>
+					<tr th:each="user : ${users}">
+		            	<td th:text="${user.id}"></td>
+		            	<td th:text="${user.userId}"></td>
+		            	<td th:text="${user.userName}"></td>
+
+		            	<td><button  name="id" value="${user.id}"></button></td>
+		        	</tr>
+	        	</table>
+	      <!--
+	        </form>
+	       -->
+		</div>
+  	</div>
+  </body>
+</html>

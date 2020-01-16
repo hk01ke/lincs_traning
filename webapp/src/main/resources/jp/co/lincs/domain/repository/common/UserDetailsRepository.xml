@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC
+    "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="jp.co.lincs.domain.repository.common.UserDetailsRepository">
+
+	<select id="findUserSkillByUserId" resultType="jp.co.lincs.domain.model.common.UserSkill">
+		SELECT
+			os,
+			language,
+			db,
+			other
+		FROM
+			user_skill
+		WHERE
+			user_id = #{userId}
+	</select>
+
+	<select id="findUserProjectsByUserId" resultType="jp.co.lincs.domain.model.common.UserProject">
+		SELECT
+			project_id,
+			project_name,
+			start_date,
+			end_date,
+			industry,
+			role,
+			os,
+			db,
+			language,
+			tool,
+			phase_research_flg,
+			phase_requirement_flg,
+			phase_basic_design_flg,
+			phase_detailed_design_flg,
+			phase_coding_flg,
+			phase_unit_test_flg,
+			phase_it_test_flg,
+			phase_st_test_flg,
+			phase_uat_flg,
+			phase_maintenance_flg,
+			content
+		FROM
+			user_projects
+		WHERE
+			user_id = #{userId}
+	</select>
+
+	<select id="findByUserId"  resultType="jp.co.lincs.domain.model.common.User">
+		SELECT
+			t3.user_id,
+			t3.user_name,
+			t3.modifide_count,
+			t4.auth_id
+		FROM
+			(
+				SELECT
+					t1.user_id,
+					t1.user_name,
+					t2.modifide_count
+				FROM
+					(
+						SELECT
+							user_id,
+							user_name
+						FROM
+							user
+						WHERE
+							user_id = #{userId}
+					) AS t1
+				INNER JOIN
+					(
+						SELECT
+							user_id,
+							modifide_count
+						FROM
+							user_password_history
+						WHERE
+							user_id = #{userId}
+						GROUP BY
+							modifide_count
+					) AS t2
+				ON
+					t1.user_id = t2.user_id
+			) AS t3
+		INNER JOIN
+			user_auth AS t4
+		ON
+			t3.user_id = t4.user_id
+	</select>
+
+</mapper>

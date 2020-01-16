@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8"/>
+    <title>ユーザートップ画面</title>
+    <style>
+    	table tr td {
+    		border:solid 1px black;
+    	}
+    </style>
+  </head>
+  <body>
+  	<div>
+  		<div>
+			氏名
+			<span th:text="${@sessionData.loginUser.userName}"></span>
+			<div>
+				<div>
+					<table>
+						<tr>
+							<td>
+								【OS】<br>
+								<span th:text="${userDetails.userSkill.os}"></span>
+							</td>
+							<td>
+								【言語】<br>
+								<span th:text="${userDetails.userSkill.language}"></span>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								【DB】<br>
+								<span th:text="${userDetails.userSkill.db}"></span>
+							</td>
+							<td>
+								【その他（ツール・業務知識・利用製品等）】<br>
+								<span th:text="${userDetails.userSkill.other}"></span>
+							</td>
+						</tr>
+					</table>
+				</div>
+				<div>
+					<table>
+						<tr>
+							<td rowspan="2">No</td>
+							<td rowspan="2">期　間</td>
+							<td rowspan="2">ユーザー／業種</td>
+							<td rowspan="2">プロジェクト名</td>
+							<td rowspan="2">役割</td>
+							<td rowspan="2">機種OS</td>
+							<td rowspan="2">DB</td>
+							<td rowspan="2">言語</td>
+							<td rowspan="2">ツール</td>
+							<td colspan="9">フェーズ</td>
+						</tr>
+						<tr>
+							<td>調査分析</td>
+							<td>要件定義</td>
+							<td>基本設計</td>
+							<td>詳細設計</td>
+							<td>製造／単体試験</td>
+							<td>結合試験</td>
+							<td>総合試験</td>
+							<td>運用試験</td>
+							<td>保守／運用</td>
+						</tr>
+						<!--/*/ <div th:each="userProject, stat : ${userDetails.userProjects}" > /*/-->
+						<tr>
+							<td rowspan="3" th:text="${stat.index + 1}"></td>
+							<td th:text="${userProject.startDate}"></td>
+							<td th:text="${userProject.industry}"></td>
+							<td th:text="${userProject.projectName}"></td>
+							<td th:text="${userProject.role}"></td>
+							<td rowspan="3" th:text="${userProject.os}"></td>
+							<td rowspan="3" th:text="${userProject.db}"></td>
+							<td rowspan="3" th:text="${userProject.language}"></td>
+							<td rowspan="3" th:text="${userProject.tool}"></td>
+							<td rowspan="3" th:text="${userProject.dispPhaseResearch}"></td>
+							<td rowspan="3" th:text="${userProject.dispPhaseRequirement}"></td>
+							<td rowspan="3" th:text="${userProject.dispPhaseBasicDesign}"></td>
+							<td rowspan="3" th:text="${userProject.dispPhaseDetailedDesign}"></td>
+							<td rowspan="3" th:text="${userProject.dispPhaseCodingUnitTest}"></td>
+							<td rowspan="3" th:text="${userProject.dispPhaseResearch}"></td>
+							<td rowspan="3" th:text="${userProject.dispPhaseResearch}"></td>
+							<td rowspan="3" th:text="${userProject.dispPhaseResearch}"></td>
+							<td rowspan="3" th:text="${userProject.dispPhaseResearch}"></td>
+						</tr>
+						<tr>
+							<td th:text="${userProject.endDate}"></td>
+							<td rowspan="2" colspan="3" th:text="${userProject.content}">【内容】</td>
+						</tr>
+						<tr>
+							<td th:text="${userProject.dispPeriod}"></td>
+						</tr>
+						<!--/*/ </div> /*/-->
+					</table>
+				</div>
+			</div>
+
+
+  		</div>
+  	</div>
+  </body>
+</html>

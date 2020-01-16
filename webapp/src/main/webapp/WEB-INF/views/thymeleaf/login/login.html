@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8"/>
+    <title>ログイン画面</title>
+  </head>
+  <body>
+  	<div>
+  		<div>
+  		    <span th:text="${hello}">この部分が動的に置き換えられます</span>
+  			<form id="loginform" name="loginform" action="login" method="post">
+  				<div>ユーザーID　：　<input type="text" name="userId" /></div>
+  				<div>パスワード　：　<input type="password" name="userPassword" /></div>
+  				<div><input type="submit" value="ログイン"/></div>
+  			</form>
+  		</div>
+  	</div>
+  </body>
+</html>

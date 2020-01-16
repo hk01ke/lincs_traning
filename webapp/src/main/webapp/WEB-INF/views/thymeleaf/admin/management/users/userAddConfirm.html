@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8"/>
+    <title>ユーザー新規登録確認画面</title>
+  </head>
+  <body>
+  	<div>
+  		<div>
+  			<form id="userAddForm" name="userAddForm" action="/webapp/admin/management/users/userAddExecute" method="post">
+  				<div>ユーザーID　：　<span th:text="${@adminSession.userAddForm.userId}"></span></div>
+  				<div>ユーザー名　：　<span th:text="${@adminSession.userAddForm.userName}"></span></div>
+  				<div><input type="submit" value="実行"/></div>
+  			</form>
+  		</div>
+  	</div>
+  </body>
+</html>

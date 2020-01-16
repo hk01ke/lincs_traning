@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8"/>
+    <title>管理機能トップ画面</title>
+  </head>
+  <body>
+  	<div>
+  		<div>
+  		    <span th:text="${hello}">この部分が動的に置き換えられます</span>
+  		    管理機能
+   		    <span th:text="${@sessionData.loginUser.userName}"></span>
+		</div>
+		<div>
+  			<form action="/webapp/admin/management/users/userList" method="post">
+  				<div><input type="submit" value="ユーザー一覧"/></div>
+  			</form>
+  			<form action="/webapp/admin/management/users/userAdd" method="post">
+  				<div><input type="submit" value="ユーザー新規登録"/></div>
+  			</form>
+		</div>
+  	</div>
+  </body>
+</html>

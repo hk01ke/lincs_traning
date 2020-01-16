@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC
+    "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="jp.co.lincs.domain.repository.common.UserAuthRepository">
+
+	<select id="findByUserId" resultType="jp.co.lincs.domain.model.common.User">
+		SELECT
+			user_id
+		FROM
+			user
+		WHERE
+			user_id = #{userId}
+	</select>
+
+	<select id="findEffect" resultType="jp.co.lincs.domain.model.common.User">
+		SELECT
+			t3.user_id,
+			t3.user_name,
+			t3.modifide_count,
+			t4.auth_id
+		FROM
+			(
+				SELECT
+					t1.user_id,
+					t1.user_name,
+					t2.modifide_count
+				FROM
+					(
+						SELECT
+							user_id,
+							user_name
+						FROM
+							user
+						WHERE
+							user_id = #{userId}
+						AND
+							del_flg = '0'
+					) AS t1
+				INNER JOIN
+					(
+						SELECT
+							user_id,
+							modifide_count
+						FROM
+							user_password_history
+						WHERE
+							user_id = #{userId}
+						AND
+							password = #{password}
+						AND
+							lock_flg = '0'
+						GROUP BY
+							modifide_count
+					) AS t2
+				ON
+					t1.user_id = t2.user_id
+			) AS t3
+		INNER JOIN
+			user_auth AS t4
+		ON
+			t3.user_id = t4.user_id
+	</select>
+
+	<insert id="insertUser">
+		INSERT INTO
+			user
+		(
+			user_id,
+			user_name,
+			del_flg
+	    ) VALUES (
+			#{userId},
+			#{userName},
+			0
+    	)
+	</insert>
+
+	<insert id="insertUserAuth">
+		INSERT INTO
+			user_auth
+		(
+			user_id,
+			auth_id
+	    ) VALUES (
+			#{userId},
+			#{authId}
+    	)
+	</insert>
+
+	<insert id="insertUserPasswordHistory">
+		INSERT INTO
+			user_password_history
+		(
+			user_id,
+			modifide_count,
+			password,
+			lock_count,
+			lock_flg
+	    ) VALUES (
+			#{userId},
+			0,
+			#{password},
+			0,
+			0
+    	)
+	</insert>
+
+</mapper>
