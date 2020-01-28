@@ -1,9 +1,10 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
-  <head>
+<html xmlns:th="http://www.thymeleaf.org"
+    th:replace="~{thymeleaf/layout/template :: layout(~{::title},~{::body/content()})}">
+<head>
     <meta charset="UTF-8"/>
     <title>ログイン画面</title>
-  </head>
+</head>
   <body>
   	<div>
   		<div>

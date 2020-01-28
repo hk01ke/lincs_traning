@@ -1,6 +1,7 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
-  <head>
+<html xmlns:th="http://www.thymeleaf.org"
+    th:replace="~{thymeleaf/layout/template :: layout(~{::title},~{::body/content()})}">
+<head>
     <meta charset="UTF-8"/>
     <title>ユーザートップ画面</title>
     <style>
@@ -8,7 +9,7 @@
     		border:solid 1px black;
     	}
     </style>
-  </head>
+</head>
   <body>
   	<div>
   		<div>
